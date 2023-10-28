@@ -1,0 +1,13 @@
+{
+    "name": "David",
+    "symptoms": ["eczema", "oily skin", "wrinkles", "dry skin"],
+    "habits": ["sleeps on side", "diet"],
+    "test_history": [
+        {
+            "skincare_test1": {
+                "found_symptoms": ["cystic acne", "oily skin", "wrinkles", "dry skin", "eczema"],
+                "found_habits": ["rolls in bed", "sleeps on side"]
+            }
+        }
+    ]
+}
