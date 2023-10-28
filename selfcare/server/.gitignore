@@ -1,2 +1,4 @@
 config.json
 .env
+mindsdb_connection.js
+.DS_Store
