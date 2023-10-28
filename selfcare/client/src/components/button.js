@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';  // Corrected the import
 
 const MyButtonComponent = () => {
   const [menuValue, setMenuValue] = useState(0);
   const [dragging, setDragging] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState([]);  // Renamed for consistency
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [data, setData] = useState("");
+  const [filename, setFilename] = useState("No file Uploaded");
 
   const handleSkincareButtonClick = () => {
     setMenuValue(1);
@@ -29,13 +32,31 @@ const MyButtonComponent = () => {
 
       Promise.all(uploadedImagesPromises)
         .then(images => {
-          setUploadedImages(images);  // Updated to match state variable name
+          setUploadedImages(images);
         })
         .catch(error => {
           console.error('Error uploading images:', error);
         });
     } else {
       alert("Please upload image files only.");
+    }
+  };
+
+  const sendImagesToServer = async () => {
+    const formData = new FormData();
+    uploadedImages.forEach((image, index) => {
+      formData.append(`image${index}`, image);
+    });
+
+    try {
+      const response = await axios.post('http://localhost:5000/your-flask-endpoint', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Server response:', response.data);
+    } catch (error) {
+      console.error('Error uploading images:', error);
     }
   };
 
@@ -56,7 +77,7 @@ const MyButtonComponent = () => {
   return (
     <>
       {menuValue === 0 && (
-        <button 
+        <button
           style={{
             padding: '40px',
             backgroundColor: '#4CAF50',
@@ -65,16 +86,16 @@ const MyButtonComponent = () => {
             borderRadius: '4px',
             cursor: 'pointer',
             fontSize: '18px',
-            marginLeft: '40px'
+            marginLeft: '40px',
           }}
           onClick={handleSkincareButtonClick}
         >
           Begin Assessment
         </button>
       )}
-      
+
       {menuValue === 1 && (
-        <div 
+        <div
           style={{
             position: 'fixed',
             right: '0',
@@ -83,23 +104,21 @@ const MyButtonComponent = () => {
             height: '100vh',
             display: 'flex',
             flexDirection: 'column',
-            backgroundColor : "white"
+            backgroundColor: 'white',
           }}
           onDragEnter={onDragEnter}
           onDragLeave={onDragLeave}
           onDrop={onDrop}
         >
-          <div 
-
+          <div
             style={{
               flex: 1,
-              backgroundColor: "whitesmoke"
-
+              backgroundColor: 'whitesmoke',
             }}
           >
-            {<text style={{ display: 'flex', justifyContent: 'center', height: '100%', fontSize: 45}}>Product Recommendations: </text>}
+            <div style={{ display: 'flex', justifyContent: 'center', height: '100%', fontSize: 45 }}>Product Recommendations:</div>
           </div>
-          <div 
+          <div
             style={{
               flex: 1,
               backgroundColor: '#ccc',
@@ -109,7 +128,7 @@ const MyButtonComponent = () => {
             {dragging ? (
               <p>Drop files here</p>
             ) : (
-              <label 
+              <label
                 style={{
                   display: 'inline-block',
                   padding: '12px 30px',
@@ -121,10 +140,10 @@ const MyButtonComponent = () => {
                 }}
               >
                 Upload Images
-                <input 
-                  type="file" 
-                  multiple 
-                  onChange={handleImageUpload} 
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleImageUpload}
                   style={{
                     opacity: 0,
                     position: 'absolute',
