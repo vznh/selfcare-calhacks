@@ -80,7 +80,7 @@
             fontWeight: '100',
             padding: '40px'
           }}>
-            <p style={{ fontFamily: 'Inter', fontSize: '80px'}}>hello, {username}</p>
+            <p style={{ fontFamily: 'Inter', fontSize: '80px'}}>welcome to <b>selfcare.io</b></p>
             <span style={{
               fontSize:'48px',
             }}>{currentTime}</span>  

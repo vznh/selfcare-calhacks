@@ -41,13 +41,27 @@ const Verification = ({ userData }) => {
     }
   }, [animatedText, explanation, currentCharIndex]);
 
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div>
-        <h1>Your Skin Type</h1>
-        <p>{animatedText}</p>
-      </div>
-    </div>
+return (
+    <>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <h3>Skin Type:</h3>
+            <span><b>Sensitive & Combination Skin</b>: Your skin is sensitive as it reacts to new products by breaking out. You mentioned your skin feels dry during cloudy days, which could indicate a combination skin type with both oily and dry areas.</span>
+            <br />
+            <span><b>Acne Concerns:</b> Product-related and Hormonal Acne: You get pimples when you try new products and also experience deep, painful cystic acne, which is often hormonal.</span>
+            <br />
+            <span><b>Pimple Characteristics:</b> Surface-level & Hormonal: Surface-level pimples that are easy to pop are often related to issues like hygiene or irritation, while deep and painful cystic acne is usually hormonal.</span>
+            <br />
+            <span><b>Areas of Concern:</b></span>
+            <span><b>Cheeks and Jawline</b>: These areas are common for hormonal acne.</span>
+            <br />
+            <span><b>Additional Observations:</b></span>
+            <span><b>Redness:</b> Noted around new acne spots and around the nose, but not directly on it.</span>
+            <br />
+            <span><b>Smooth Texture:</b> Overall skin texture is smooth, which is a good sign.</span>
+            <br />
+            <span><b>Skincare Routine: </b>We don't know your current routine, so we don't know if your skincare routine is bad for you.</span>
+        </div>
+    </>
   );
 };
 
