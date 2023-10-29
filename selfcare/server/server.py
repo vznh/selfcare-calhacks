@@ -13,18 +13,30 @@ def home():
     return {"message": "Hello from backend"}
 
 
-@app.route("/upload", methods=['POST'])
-def upload():
-    file = request.files['file']
-    file_path = 'uploads/' + file.filename
-    file.save(file_path)
+@app.route("/receiveImages", methods=['POST'])
+def receiveImages():
+    messages = []
 
-    img = imread(file_path)
-    os.remove(file_path)  # Remove the file after reading
+    for i in range(10):
+        try:
+            file = request.files.get(f'image{i}')
+            if file:
+                file_path = f'images/{file.filename}'
+                file.save(file_path)
 
-    prediction = analyze_photo(img)
+                img = imread(file_path)
 
-    return jsonify({"message": prediction})
+                prediction = analyze_photo(img) 
+                messages.append({"filename": file.filename, "message": prediction})
+        except Exception:
+            break
+
+    return jsonify({"messages": messages})
+
+@app.route("/uploadUserAnswers", methods=['POST'])
+def uploadUserAnswers():
+    answers = request.get_json()
+    return jsonify(answers)
 
 
 if __name__ == '__main__':
