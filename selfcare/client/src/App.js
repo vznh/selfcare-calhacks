@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import UploadImage from './components/skincare-analysis/UploadImage';
-import ClarifyingQ from './components/skincare-analysis/ClarifyingQ'
+import ClarifyingQ from './components/skincare-analysis/ClarifyingQ';
+import Verification from './components/skincare-analysis/Verification'
 
 function App() {
   // General state
@@ -144,7 +145,10 @@ function App() {
       <UploadImage level={level} setLevel={setLevel} />
     )}
     {menuValue === 2 && level === 2 && (
-      <ClarifyingQ />
+      <ClarifyingQ level={level} setLevel={setLevel} />
+    )}
+    {menuValue === 2 && level === 3 && (
+      <Verification  level={level} setLevel={setLevel} />
     )}
 
     </>
