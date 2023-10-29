@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
 
-const UploadImage = () => {
+const UploadImage = ( {level, setLevel} ) => {
     // General state
-    const [level, setLevel] = useState(1); 
     const [imagesLoaded, setImagesLoaded] = useState(false);
     const [imageCnt, setImageCnt] = useState(0);
     const [imageFiles, setImagesFiles] = useState([]);
@@ -67,6 +66,11 @@ const UploadImage = () => {
             }
         };
 
+        const processImgs = () => {
+            
+            setLevel(2);
+        }
+
     return (
         <>
             <div class="container" style={{
@@ -118,7 +122,7 @@ const UploadImage = () => {
                 </div>
                 {imageCnt >= 5 && (
                         <button 
-                        onClick={sendImgArrToServer}
+                        onClick={() => processImgs()}
                         style={{
                             fontFamily: "Inter",
                             textDecoration: 'underline', 

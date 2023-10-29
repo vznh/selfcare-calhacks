@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import UploadImage from './components/skincare-analysis/UploadImage';
+import ClarifyingQ from './components/skincare-analysis/ClarifyingQ'
 
 function App() {
   // General state
@@ -105,12 +106,13 @@ function App() {
             borderRadius: '4px',
             cursor: 'pointer',
             fontSize: '18px',
-            marginLeft: '40px',
+            marginLeft: '40px', 
           }} onClick={handleProcessButtonClick}>start an assessments</button>
         </div>"
 
       </main>
     )}
+
     { /* Test Selection */ }
     {menuValue === 1 && level === 0 && (
       <main className="choice" style={{ fontFamily: "Inter" }}>
@@ -122,7 +124,7 @@ function App() {
           <button className='left-button' onClick={() => beginTest('skincare')} style={{
             position: 'absolute',
             top: '50%',
-            transform: 'translateY(-50%)',
+            transform: 'translateY(-50%)',  
             left: '25%',
             fontWeight: '100',
           }}>analyze your skin</button>
@@ -136,16 +138,15 @@ function App() {
         </div>
       </main>
     )}
-    { /* Skincare Test Level 1 */ }
+
+    { /* Skincare Test */ }
     {menuValue === 2 && level === 1 && (
-      <UploadImage />
+      <UploadImage level={level} setLevel={setLevel} />
     )}
     {menuValue === 2 && level === 2 && (
-      <></>
+      <ClarifyingQ />
     )}
-    {menuValue === 2 && level === 3 && (
-      <></>
-    )}
+
     </>
   );
 }
