@@ -70,10 +70,18 @@ const ClarifyingQ = ( {level, setLevel} ) => {
     justifyContent: 'center',
     minHeight: '100vh'
   };
+  const buttonStyle = {
+    backgroundColor: 'black', // Black background
+    color: 'white',            // White text
+    fontSize: '1.2em',          // Bigger font
+    padding: '10px 20px',       // Padding for bigger appearance
+    margin: '10px',             // Spacing out buttons
+    cursor: 'pointer',          // Pointer cursor on hover
+    border: 'none'              // Remove default borders
+  };
 
   return (
-    
-    <div style = {containerStyle} className="container">
+    <div style={containerStyle} className="container">
       <h1>Question {questionNum}</h1>
       <p>{questions[questionNum]}</p>
       <input 
@@ -81,8 +89,8 @@ const ClarifyingQ = ( {level, setLevel} ) => {
         value={currentAnswer}
         onChange={handleUserInput}
       />
-      <button onClick={handlePrevClick} disabled={questionNum === 1}>Previous</button>
-      <button onClick={handleNextClick} disabled={!isAnswered}>Next</button>
+      <button style={buttonStyle} onClick={handlePrevClick} disabled={questionNum === 1}>Previous</button>
+      <button style={buttonStyle} onClick={handleNextClick} disabled={!isAnswered}>Next</button>
     </div>
   );
 };
