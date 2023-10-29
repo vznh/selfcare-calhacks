@@ -7,6 +7,7 @@ const MyButtonComponent = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const [data, setData] = useState("");
   const [filename, setFilename] = useState("No file Uploaded");
+  const [fileAmt, setFileAmt] = useState(0);
 
   const handleSkincareButtonClick = () => {
     setMenuValue(1);
@@ -25,7 +26,7 @@ const MyButtonComponent = () => {
             resolve(reader.result);
           };
           reader.onerror = () => {
-            reject(new Error('There was an issue reading the file.'));
+            reject(new Error('there was an issue reading the file.'));
           };
         });
       });
@@ -35,10 +36,10 @@ const MyButtonComponent = () => {
           setUploadedImages(images);
         })
         .catch(error => {
-          console.error('Error uploading images:', error);
+          console.error('there was an error uploading images', error);
         });
     } else {
-      alert("Please upload image files only.");
+      alert("please upload only image files ending in the extension ['.png', '.jpeg, '.jpg'. we currently do not support .heic files!");
     }
   };
 
@@ -72,6 +73,7 @@ const MyButtonComponent = () => {
     e.preventDefault();
     setDragging(false);
     handleImageUpload({ target: { files: e.dataTransfer.files } });
+    setFileAmt(fileAmt + 1);
   };
 
   return (
@@ -79,8 +81,11 @@ const MyButtonComponent = () => {
       {menuValue === 0 && (
         <button
           style={{
+            position: 'relative',
+            top: '20px',
             padding: '40px',
-            backgroundColor: '#4CAF50',
+            fontFamily: 'Inter',
+            backgroundColor: 'green',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
@@ -90,7 +95,7 @@ const MyButtonComponent = () => {
           }}
           onClick={handleSkincareButtonClick}
         >
-          Begin Assessment
+          begin your assessment
         </button>
       )}
 
@@ -113,33 +118,33 @@ const MyButtonComponent = () => {
           <div
             style={{
               flex: 1,
-              backgroundColor: 'whitesmoke',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'center', height: '100%', fontSize: 45 }}>Product Recommendations:</div>
-          </div>
-          <div
-            style={{
-              flex: 1,
               backgroundColor: '#ccc',
             }}
           >
-            <h3>Please Upload Images Of Yourself!</h3>
+            <span style={{ padding: '20px', fontFamily: "Inter", fontSize: '20px', fontWeight: 'normal'}}>upload 5 - 10 images</span>
+            <span style={{ padding: '20px', fontFamily: "Inter", fontSize: '16px', fontWeight: 'lighter'}}>{fileAmt} images uploaded</span>
             {dragging ? (
-              <p>Drop files here</p>
+              <div className="imageDropContainer" style={{
+                backgroundColor: '#000',
+                position: 'relative',
+                top: '10px',
+                left: '10px',
+                padding: '60px',
+                width: '200px',
+                height: '200px'
+              }}>
+                <p>recieving file.. (.jpg, .png, .jpeg supported)</p>
+              </div>
             ) : (
-              <label
-                style={{
+              <label style={{
                   display: 'inline-block',
                   padding: '12px 30px',
                   margin: '10px',
                   cursor: 'pointer',
                   color: 'white',
-                  backgroundColor: '#4CAF50',
+                  backgroundColor: 'gray',
                   borderRadius: '4px',
-                }}
-              >
-                Upload Images
+              }}>...or upload images!
                 <input
                   type="file"
                   multiple

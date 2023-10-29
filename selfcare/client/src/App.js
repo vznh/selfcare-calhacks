@@ -59,6 +59,9 @@ function App() {
         }}>
           <p style={{ fontSize: '24px', fontWeight: '400' }}><span style={{ fontWeight:'300'}}>focus areas:</span> {symptoms.join(', ')}</p>
         </div>
+        <div style={{ flex: 1, backgroundColor: 'whitesmoke', }}>
+          <div style={{ padding: '40px', fontSize: '40px', fontFamily: 'Inter', fontWeight: '300' }}>product recommendations</div>
+        </div>
         <MyButtonComponent/>
 
       </main>
